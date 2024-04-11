@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const Domain = require('./models/domain.model');
 const Event = require('./models/event.model');
 
+const userRoutes = require('./routes/user.routes');
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -60,7 +62,7 @@ app.get('/api/events', (req, res, next) => {
 	});
 });
 
-app.get('/api/event/:eventId', (req, res, next) => {
+app.get('/api/events/:eventId', (req, res, next) => {
 	Event.findById({ _id: req.params.eventId }).then((document) => {
 		res.status(200).json({
 			message: 'Event fetched successfully.',
@@ -100,6 +102,10 @@ app.post('/api/domains', (req, res, next) => {
 			});
 		});
 });
+
+app.use('/api/users', userRoutes);
+
+// app.use('/api/events', )
 
 const port = process.env.PORT || 3000;
 
