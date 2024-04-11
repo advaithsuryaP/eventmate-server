@@ -58,8 +58,13 @@ router.post('/login', (req, res, next) => {
 			);
 			return res.status(200).json({
 				message: 'SignIn successfull.',
-				data: '',
-				token: token,
+				data: {
+					userId: fetchedUser._id,
+					username: fetchedUser.username,
+					email: fetchedUser.email,
+					token: token,
+					events: fetchedUser.events,
+				},
 			});
 		})
 		.catch((err) => {
