@@ -31,20 +31,15 @@ exports.signIn = (req, res, next) => {
 	let fetchedUser;
 	User.findOne({ email: req.body.email })
 		.then((user) => {
-			console.log(user);
 			if (!user) {
-				return res.status(401).json({
-					message: 'Invalid email',
-				});
+				throw new Error('Invalid authentication credentials');
 			}
 			fetchedUser = user;
 			return bcrypt.compare(req.body.password, user.password);
 		})
 		.then((result) => {
 			if (!result) {
-				return res.status(401).json({
-					message: 'Invalid password',
-				});
+				throw new Error('Invalid authentication credentials');
 			}
 			const token = jwt.sign(
 				{ email: fetchedUser.email, userId: fetchedUser._id },
@@ -67,7 +62,7 @@ exports.signIn = (req, res, next) => {
 		})
 		.catch((err) => {
 			return res.status(401).json({
-				message: 'Some unknown error occured. Try again later.',
+				message: 'Invalid authentication credentials!',
 			});
 		});
 };
