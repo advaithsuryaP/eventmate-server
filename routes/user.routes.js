@@ -64,6 +64,7 @@ router.post('/login', (req, res, next) => {
 					email: fetchedUser.email,
 					token: token,
 					events: fetchedUser.events,
+					expiresIn: 3600,
 				},
 			});
 		})
