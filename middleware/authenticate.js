@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
 		next();
 	} catch (error) {
 		res.status(401).json({
-			message: 'Authentication failed.',
+			message: 'You are not authenticated to view this page.',
 		});
 	}
 };
