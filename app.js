@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/user.routes');
 const eventRoutes = require('./routes/events.routes');
 const domainRoutes = require('./routes/domains.routes');
+const registerRoutes = require('./routes/register.routes');
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use((req, res, next) => {
 app.use('/api/users', userRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/domains', domainRoutes);
+app.use('/api/register', registerRoutes);
 
 const port = process.env.PORT || 3000;
 
