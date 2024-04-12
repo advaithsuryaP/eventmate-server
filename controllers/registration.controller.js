@@ -1,10 +1,7 @@
-const express = require('express');
-const router = express.Router();
+const Registration = require('../models/registration.model');
 
-const Register = require('../models/register.model');
-
-router.post('', (req, res, next) => {
-	const register = new Register({
+exports.addRegistration = (req, res, next) => {
+	const register = new Registration({
 		userId: req.body.userId,
 		eventId: req.body.eventId,
 		domainId: req.body.domainId,
@@ -23,15 +20,13 @@ router.post('', (req, res, next) => {
 				message: 'Error while creating an event',
 			});
 		});
-});
+};
 
-router.get('', (req, res, next) => {
-	Register.find().then((documents) => {
+exports.getRegistrations = (req, res, next) => {
+	Registration.find().then((documents) => {
 		res.status(200).json({
 			message: 'Registrations fetched successfully.',
 			data: documents,
 		});
 	});
-});
-
-module.exports = router;
+};

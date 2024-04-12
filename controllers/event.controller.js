@@ -1,20 +1,15 @@
-const express = require('express');
-const router = express.Router();
-
-const authenticate = require('../middleware/authenticate');
-
 const Event = require('../models/event.model');
 
-router.get('/:eventId', authenticate, (req, res, next) => {
+exports.getEvent = (req, res, next) => {
 	Event.findById({ _id: req.params.eventId }).then((document) => {
 		res.status(200).json({
 			message: 'Event fetched successfully.',
 			data: document,
 		});
 	});
-});
+};
 
-router.post('', (req, res, next) => {
+exports.addEvent = (req, res, next) => {
 	const event = new Event({
 		image: req.body.image,
 		title: req.body.title,
@@ -40,15 +35,13 @@ router.post('', (req, res, next) => {
 				message: 'Error while creating an event',
 			});
 		});
-});
+};
 
-router.get('', (req, res, next) => {
+exports.getEvents = (req, res, next) => {
 	Event.find().then((documents) => {
 		res.status(200).json({
 			message: 'Events fetched successfully.',
 			data: documents,
 		});
 	});
-});
-
-module.exports = router;
+};

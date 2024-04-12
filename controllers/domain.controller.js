@@ -1,18 +1,15 @@
-const express = require('express');
-const router = express.Router();
-
 const Domain = require('../models/domain.model');
 
-router.get('', (req, res, next) => {
+exports.getDomains = (req, res, next) => {
 	Domain.find().then((documents) => {
 		res.status(200).json({
 			message: 'Domains fetched successfully.',
 			data: documents,
 		});
 	});
-});
+};
 
-router.post('', (req, res, next) => {
+exports.addDomain = (req, res, next) => {
 	const domain = new Domain({
 		icon: req.body.icon,
 		name: req.body.name,
@@ -33,6 +30,4 @@ router.post('', (req, res, next) => {
 				message: 'Error while creating a domain',
 			});
 		});
-});
-
-module.exports = router;
+};

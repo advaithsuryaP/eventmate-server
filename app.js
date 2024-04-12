@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const userRoutes = require('./routes/user.routes');
-const eventRoutes = require('./routes/events.routes');
-const domainRoutes = require('./routes/domains.routes');
-const registerRoutes = require('./routes/register.routes');
+const eventRoutes = require('./routes/event.routes');
+const domainRoutes = require('./routes/domain.routes');
+const registrationRoutes = require('./routes/registration.routes');
 
 const app = express();
 
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 app.use('/api/users', userRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/domains', domainRoutes);
-app.use('/api/register', registerRoutes);
+app.use('/api/register', registrationRoutes);
 
 const port = process.env.PORT || 3000;
 
