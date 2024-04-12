@@ -1,0 +1,6 @@
+{
+	"env": {
+		"MONGODB_PASSWORD": "qrlE9EyIBQgDdtpj",
+		"JWT_KEY": "secret_for_auth_seng645"
+	}
+}
