@@ -34,7 +34,7 @@ const port = process.env.PORT || 3000;
 
 mongoose
 	.connect(
-		`mongodb+srv://advaith:${process.env.MONGODB_PASSWORD}@seng-645.dxkzx73.mongodb.net/eventmate?retryWrites=true&w=majority&appName=seng-645`
+		`mongodb+srv://advaith:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_URI}.mongodb.net/eventmate?retryWrites=true&w=majority&appName=seng-645`
 	)
 	.then((result) => {
 		console.log('Connected to database!');
