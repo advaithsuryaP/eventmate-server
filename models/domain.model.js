@@ -7,7 +7,6 @@ const domainSchema = new mongoose.Schema(
 		name: { type: String, required: true },
 		description: { type: String, required: true },
 		interests: [{ type: String, required: true }],
-		rank: { type: Number, required: true },
 	},
 	{ timestamps: true }
 );

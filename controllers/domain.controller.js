@@ -15,7 +15,6 @@ exports.addDomain = (req, res, next) => {
 		name: req.body.name,
 		description: req.body.description,
 		interests: req.body.interests,
-		rank: req.body.rank,
 	});
 	domain
 		.save()

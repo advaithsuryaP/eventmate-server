@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema(
 	{
 		email: { type: String, required: true, unique: true },
 		username: { type: String, required: true },
-		password: { type: String, required: true },
+		password: { type: String, required: true, minLength: 4 },
 		events: [
 			{
 				type: mongoose.Schema.Types.ObjectId,
@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema(
 				required: true,
 			},
 		],
+		isAdmin: { type: Boolean, default: false },
 	},
 	{ timestamps: true }
 );

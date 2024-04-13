@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user.model');
@@ -9,19 +9,18 @@ exports.signUp = (req, res, next) => {
 			email: req.body.email,
 			username: req.body.username,
 			password: hash,
+			isAdmin: req.body.isAdmin,
 			events: [],
 		});
 		user.save()
-			.then((result) => {
+			.then((_) => {
 				res.status(201).json({
-					message: 'User registered successfully.',
-					data: result.username,
+					message: 'User registered successfully!',
 				});
 			})
 			.catch((err) => {
 				res.status(422).json({
 					message: 'Error in registering user',
-					error: err,
 				});
 			});
 	});
@@ -48,16 +47,15 @@ exports.signIn = (req, res, next) => {
 					expiresIn: '1h',
 				}
 			);
+			const sanitizedUserObj = {
+				...fetchedUser.toObject(),
+				password: undefined,
+			};
 			return res.status(200).json({
-				message: 'SignIn successfull.',
-				data: {
-					userId: fetchedUser._id,
-					username: fetchedUser.username,
-					email: fetchedUser.email,
-					token: token,
-					events: fetchedUser.events,
-					expiresIn: 3600,
-				},
+				message: `User authentication successful.`,
+				data: sanitizedUserObj,
+				expiresIn: 3600, // 1 hour
+				token: token,
 			});
 		})
 		.catch((err) => {
