@@ -1,7 +1,0 @@
-{
-	"env": {
-		"MONGODB_PASSWORD": "qrlE9EyIBQgDdtpj",
-		"JWT_KEY": "secret_for_auth_seng645",
-		"MONGODB_URI": "seng-645.dxkzx73"
-	}
-}
