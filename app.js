@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const userRoutes = require('./routes/user.routes');
@@ -36,13 +35,4 @@ app.use('/api/events', eventRoutes);
 app.use('/api/domains', domainRoutes);
 app.use('/api/register', registrationRoutes);
 
-mongoose
-	.connect(`${process.env.MONGODB_URI}`)
-	.then((result) => {
-		console.log('Connected to database!');
-		app.listen(port);
-	})
-	.catch((err) => {
-		console.log(err);
-		console.log('Error connecting to database');
-	});
+app.listen(port);
