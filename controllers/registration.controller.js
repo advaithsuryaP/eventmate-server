@@ -27,7 +27,6 @@ exports.addRegistration = (req, res, next) => {
 exports.deleteRegistration = (req, res, next) => {
 	Registration.deleteOne({ _id: req.params.registrationId })
 		.then((result) => {
-			console.log(result);
 			res.status(200).json({
 				message: 'Registration cancelled successfully',
 				data: result,
