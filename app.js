@@ -33,6 +33,6 @@ app.use((req, res, next) => {
 app.use('/api/users', userRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/domains', domainRoutes);
-app.use('/api/register', registrationRoutes);
+app.use('/api/registrations', registrationRoutes);
 
 app.listen(port);

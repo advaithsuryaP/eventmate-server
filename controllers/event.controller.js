@@ -19,7 +19,6 @@ exports.addEvent = (req, res, next) => {
 		date: req.body.date,
 		startTime: req.body.startTime,
 		endTime: req.body.endTime,
-		attendees: req.body.attendees,
 	});
 	event
 		.save()

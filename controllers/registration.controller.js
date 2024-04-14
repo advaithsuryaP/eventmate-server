@@ -1,8 +1,6 @@
 const Registration = require('../models/registration.model');
-const Event = require('../models/event.model');
-const User = require('../models/user.model');
 
-exports.addRegistration = async (req, res, next) => {
+exports.addRegistration = (req, res, next) => {
 	const register = new Registration({
 		userId: req.body.userId,
 		eventId: req.body.eventId,
@@ -10,33 +8,47 @@ exports.addRegistration = async (req, res, next) => {
 		interests: req.body.interests,
 	});
 
-	try {
-		// Add registration document to the Registration Collection
-		await register.save();
-
-		// Update the User Collection about the registered Event Id
-		const user = await User.findById(req.body.userId);
-		user.events.push(req.body.eventId);
-		await user.save();
-
-		// Update the count of registered users in Event Collection
-		const event = await Event.findById(req.body.eventId);
-		event.attendees.push(req.body.userId);
-		await event.save();
-
-		res.status(201).json({
-			message: 'Event registration successfull',
-			data: '',
+	// Add registration document to the Registration Collection
+	register
+		.save()
+		.then((document) => {
+			res.status(201).json({
+				message: 'Event registration successfull',
+				data: document,
+			});
+		})
+		.catch((error) => {
+			res.status(422).json({
+				message: 'Error while registering for the event.',
+			});
 		});
-	} catch (e) {
-		res.status(422).json({
-			message: 'Error while registering for the event.',
+};
+
+exports.deleteRegistration = (req, res, next) => {
+	Registration.deleteOne({ _id: req.params.registrationId })
+		.then((result) => {
+			console.log(result);
+			res.status(200).json({
+				message: 'Registration cancelled successfully',
+				data: result,
+			});
+		})
+		.catch((err) => {
+			res.status(401).json({
+				message: 'Error while canceling the registration',
+			});
 		});
-	}
 };
 
 exports.getRegistrations = (req, res, next) => {
-	Registration.find().then((documents) => {
+	let query = {};
+	if (req.query.userId) {
+		query.userId = req.query.userId;
+	}
+	if (req.query.eventId) {
+		query.eventId = req.query.eventId;
+	}
+	Registration.find(query).then((documents) => {
 		res.status(200).json({
 			message: 'Registrations fetched successfully.',
 			data: documents,

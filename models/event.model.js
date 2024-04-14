@@ -15,7 +15,6 @@ const eventSchema = new mongoose.Schema(
 		date: { type: Date, required: true },
 		startTime: { type: String, required: true },
 		endTime: { type: String, required: true },
-		attendees: [{ type: String }],
 	},
 	{ timestamps: true }
 );

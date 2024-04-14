@@ -10,7 +10,6 @@ exports.signUp = (req, res, next) => {
 			username: req.body.username,
 			password: hash,
 			isAdmin: req.body.isAdmin,
-			events: [],
 		});
 		user.save()
 			.then((_) => {
