@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -7,7 +9,11 @@ const eventRoutes = require('./routes/event.routes');
 const domainRoutes = require('./routes/domain.routes');
 const registrationRoutes = require('./routes/registration.routes');
 
+const config = require('./config/db.config');
+config.connectDatabase();
+
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,16 +36,13 @@ app.use('/api/events', eventRoutes);
 app.use('/api/domains', domainRoutes);
 app.use('/api/register', registrationRoutes);
 
-const port = process.env.PORT || 3000;
-
 mongoose
-	.connect(
-		`mongodb+srv://advaith:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_URI}.mongodb.net/eventmate?retryWrites=true&w=majority&appName=seng-645`
-	)
+	.connect(`${process.env.MONGODB_URI}`)
 	.then((result) => {
 		console.log('Connected to database!');
 		app.listen(port);
 	})
 	.catch((err) => {
+		console.log(err);
 		console.log('Error connecting to database');
 	});
