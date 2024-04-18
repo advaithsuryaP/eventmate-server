@@ -7,4 +7,8 @@ router.get('', domainController.getDomains);
 
 router.post('', domainController.addDomain);
 
+router.get('/:domainId', domainController.getDomain);
+
+router.delete('/:domainId', domainController.deleteDomain);
+
 module.exports = router;
