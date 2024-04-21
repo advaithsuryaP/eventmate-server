@@ -1,12 +1,24 @@
 const express = require('express');
 const router = express.Router();
 
-const registrationController = require('../controllers/registration.controller');
+const authenticate = require('../middleware/authenticate');
 
-router.post('', registrationController.addRegistration);
+const registrationController = require('../controllers/registration.controller');
 
 router.get('', registrationController.getRegistrations);
 
-router.delete('/:registrationId', registrationController.deleteRegistration);
+router.post('', authenticate, registrationController.addRegistration);
+
+router.delete(
+	'/:registrationId',
+	authenticate,
+	registrationController.deleteRegistration
+);
+
+router.post(
+	'/event-mates',
+	authenticate,
+	registrationController.computeEventMates
+);
 
 module.exports = router;

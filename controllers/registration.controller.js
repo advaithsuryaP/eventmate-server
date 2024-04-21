@@ -8,7 +8,6 @@ exports.addRegistration = (req, res, next) => {
 		interests: req.body.interests,
 	});
 
-	// Add registration document to the Registration Collection
 	register
 		.save()
 		.then((document) => {
@@ -47,10 +46,36 @@ exports.getRegistrations = (req, res, next) => {
 	if (req.query.eventId) {
 		query.eventId = req.query.eventId;
 	}
-	Registration.find(query).then((documents) => {
-		res.status(200).json({
-			message: 'Registrations fetched successfully.',
-			data: documents,
+	Registration.find(query)
+		.then((documents) => {
+			res.status(200).json({
+				message: 'Registrations fetched successfully.',
+				data: documents,
+			});
+		})
+		.catch((err) => {
+			res.status(422).json({
+				message: 'Error while fetching registrations',
+			});
 		});
-	});
+};
+
+exports.computeEventMates = (req, res, next) => {
+	const { userId, eventId, interests } = req.body;
+	Registration.find({
+		eventId: eventId,
+		userId: { $ne: userId },
+		interests: { $in: interests },
+	})
+		.then((documents) => {
+			res.status(200).json({
+				message: 'Event mates fetched successfully',
+				data: documents,
+			});
+		})
+		.catch((err) => {
+			res.status(422).json({
+				message: 'Error while computing event mates',
+			});
+		});
 };
