@@ -43,6 +43,35 @@ exports.addEvent = (req, res, next) => {
 		});
 };
 
+exports.updateEvent = async (req, res, next) => {
+	Event.findById(req.params.eventId)
+		.then((document) => {
+			document.image = req.body.image;
+			document.title = req.body.title;
+			document.description = req.body.description;
+			document.creatorId = req.body.creatorId;
+			document.domainId = req.body.domainId;
+			document.location = req.body.location;
+			document.date = req.body.date;
+			document.startTime = req.body.startTime;
+			document.endTime = req.body.endTime;
+
+			return document.save();
+		})
+		.then((document) => {
+			res.status(200).json({
+				message: 'Event updated successfully',
+				data: document,
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(422).json({
+				message: 'Error while updating the event',
+			});
+		});
+};
+
 exports.getEvents = (req, res, next) => {
 	Event.find().then((documents) => {
 		res.status(200).json({
