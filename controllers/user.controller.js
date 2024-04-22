@@ -3,6 +3,21 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user.model');
 
+exports.getUsers = (req, res, next) => {
+	User.find()
+		.then((documents) => {
+			res.status(200).json({
+				message: 'Users fetched successfully',
+				data: documents,
+			});
+		})
+		.catch((error) => {
+			res.status(404).json({
+				message: 'Error while fetching users',
+			});
+		});
+};
+
 exports.signUp = (req, res, next) => {
 	bcrypt.hash(req.body.password, 10).then((hash) => {
 		const user = new User({

@@ -79,3 +79,8 @@ exports.computeEventMates = (req, res, next) => {
 			});
 		});
 };
+
+exports.updateInterest = (req, res, next) => {
+	const newInterests = req.body.interests;
+	// Registration.findById(req.body.registrationId).then();
+};
