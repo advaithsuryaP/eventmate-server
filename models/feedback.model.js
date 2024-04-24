@@ -28,6 +28,5 @@ const Feedback = sequelize.define('Feedback', {
 		allowNull: false,
 	},
 });
-Feedback.sync();
 
 module.exports = Feedback;
