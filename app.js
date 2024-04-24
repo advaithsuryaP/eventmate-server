@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/user.routes');
 const eventRoutes = require('./routes/event.routes');
 const domainRoutes = require('./routes/domain.routes');
+const feedbackRoutes = require('./routes/feedback.routes');
 const registrationRoutes = require('./routes/registration.routes');
 
 const config = require('./config/db.config');
@@ -33,6 +34,7 @@ app.use((req, res, next) => {
 app.use('/api/users', userRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/domains', domainRoutes);
+app.use('/api/feedbacks', feedbackRoutes);
 app.use('/api/registrations', registrationRoutes);
 
 app.listen(port);
