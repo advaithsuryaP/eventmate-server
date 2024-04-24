@@ -60,7 +60,7 @@ exports.getRegistrations = (req, res, next) => {
 		});
 };
 
-exports.computeEventMates = (req, res, next) => {
+exports.getRecommendations = (req, res, next) => {
 	const { userId, eventId, interests } = req.body;
 	Registration.find({
 		eventId: eventId,
@@ -80,7 +80,21 @@ exports.computeEventMates = (req, res, next) => {
 		});
 };
 
-exports.updateInterest = (req, res, next) => {
-	const newInterests = req.body.interests;
-	// Registration.findById(req.body.registrationId).then();
+exports.updateRegistration = (req, res, next) => {
+	Registration.findByIdAndUpdate(
+		req.body.registrationId,
+		{ $set: { interests: req.body.interests } }, // Replace interests array
+		{ new: true } // Option to return the updated document
+	)
+		.then((result) => {
+			res.status(200).json({
+				message: 'Registration updated successfully',
+				data: result,
+			});
+		})
+		.catch((err) => {
+			res.status(422).json({
+				message: 'Error during updating registration',
+			});
+		});
 };

@@ -16,9 +16,15 @@ router.delete(
 );
 
 router.post(
-	'/event-mates',
+	'/get-eventmate-recommendations',
 	authenticate,
-	registrationController.computeEventMates
+	registrationController.getRecommendations
+);
+
+router.put(
+	'/update-registration',
+	authenticate,
+	registrationController.updateRegistration
 );
 
 module.exports = router;
