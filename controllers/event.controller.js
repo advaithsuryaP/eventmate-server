@@ -23,9 +23,8 @@ exports.addEvent = (req, res, next) => {
 		creatorId: req.body.creatorId,
 		domainId: req.body.domainId,
 		location: req.body.location,
-		date: req.body.date,
-		startTime: req.body.startTime,
-		endTime: req.body.endTime,
+		startDate: req.body.startDate,
+		endDate: req.body.endDate,
 	});
 	event
 		.save()
@@ -52,9 +51,8 @@ exports.updateEvent = async (req, res, next) => {
 			document.creatorId = req.body.creatorId;
 			document.domainId = req.body.domainId;
 			document.location = req.body.location;
-			document.date = req.body.date;
-			document.startTime = req.body.startTime;
-			document.endTime = req.body.endTime;
+			document.startDate = req.body.startDate;
+			document.endDate = req.body.endDate;
 
 			return document.save();
 		})

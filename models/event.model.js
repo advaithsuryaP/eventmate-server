@@ -17,9 +17,8 @@ const eventSchema = new mongoose.Schema(
 			required: true,
 		},
 		location: { type: String, required: true },
-		date: { type: Date, required: true },
-		startTime: { type: String, required: true },
-		endTime: { type: String, required: true },
+		startDate: { type: Date, required: true },
+		endDate: { type: Date, required: true },
 	},
 	{ timestamps: true }
 );
