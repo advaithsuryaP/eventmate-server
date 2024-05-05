@@ -5,7 +5,7 @@ const authenticate = require('../middleware/authenticate');
 
 const userController = require('../controllers/user.controller');
 
-router.get('', userController.getUsers);
+router.get('', authenticate, userController.getUsers);
 
 router.post('/flag-user/:userId', authenticate, userController.flagUser);
 
