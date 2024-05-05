@@ -23,7 +23,7 @@ exports.addRegistration = (req, res, next) => {
 		});
 };
 
-exports.deleteRegistration = (req, res, next) => {
+exports.cancelRegistration = (req, res, next) => {
 	Registration.deleteOne({ _id: req.params.registrationId })
 		.then((result) => {
 			res.status(200).json({
@@ -32,6 +32,7 @@ exports.deleteRegistration = (req, res, next) => {
 			});
 		})
 		.catch((err) => {
+			console.log(err);
 			res.status(401).json({
 				message: 'Error while canceling the registration',
 			});

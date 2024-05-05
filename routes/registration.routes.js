@@ -12,7 +12,7 @@ router.post('', authenticate, registrationController.addRegistration);
 router.delete(
 	'/:registrationId',
 	authenticate,
-	registrationController.deleteRegistration
+	registrationController.cancelRegistration
 );
 
 router.post(

@@ -18,6 +18,26 @@ exports.getUsers = (req, res, next) => {
 		});
 };
 
+exports.flagUser = (req, res, next) => {
+	User.findById(req.params.userId)
+		.then((document) => {
+			const isFlaggedValue = document.isFlagged;
+			document.isFlagged = !isFlaggedValue;
+			return document.save();
+		})
+		.then((document) => {
+			res.status(200).json({
+				message: 'User flagged successfully',
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(422).json({
+				message: 'Error while flagging the user',
+			});
+		});
+};
+
 exports.signUp = (req, res, next) => {
 	bcrypt.hash(req.body.password, 10).then((hash) => {
 		const user = new User({
@@ -25,6 +45,7 @@ exports.signUp = (req, res, next) => {
 			username: req.body.username,
 			password: hash,
 			isAdmin: req.body.isAdmin,
+			isFlagged: req.body.isFlagged,
 		});
 		user.save()
 			.then((_) => {
