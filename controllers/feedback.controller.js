@@ -36,7 +36,7 @@ exports.getAllFeedbacks = (req, res, next) => {
 };
 
 exports.getUserFeedbacks = (req, res, next) => {
-	Feedback.findAll({ where: { userId: req.query.userId } })
+	Feedback.findAll({ where: { userId: req.params.userId } })
 		.then((result) => {
 			res.status(200).json({
 				message: 'User feedback fetched successfully',
@@ -52,7 +52,7 @@ exports.getUserFeedbacks = (req, res, next) => {
 };
 
 exports.getEventFeedbacks = (req, res, next) => {
-	Feedback.findAll({ where: { eventId: req.query.eventId } })
+	Feedback.findAll({ where: { eventId: req.params.eventId } })
 		.then((result) => {
 			res.status(200).json({
 				message: 'Event feedback fetched successfully',

@@ -9,8 +9,12 @@ router.post('', authenticate, feedbackController.addFeedback);
 
 router.get('', authenticate, feedbackController.getAllFeedbacks);
 
-router.get('/user', authenticate, feedbackController.getUserFeedbacks);
+router.get('/user/:userId', authenticate, feedbackController.getUserFeedbacks);
 
-router.get('/event', authenticate, feedbackController.getEventFeedbacks);
+router.get(
+	'/event/:eventId',
+	authenticate,
+	feedbackController.getEventFeedbacks
+);
 
 module.exports = router;
