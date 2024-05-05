@@ -25,6 +25,29 @@ exports.getDomain = (req, res, next) => {
 		});
 };
 
+exports.updateDomain = (req, res, next) => {
+	Domain.findById(req.params.domainId)
+		.then((document) => {
+			document.name = req.body.name;
+			document.description = req.body.description;
+			document.interests = req.body.interests;
+
+			return document.save();
+		})
+		.then((document) => {
+			res.status(200).json({
+				message: 'domain updated successfully',
+				data: document,
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(422).json({
+				message: 'Error while updating the domain',
+			});
+		});
+};
+
 exports.addDomain = (req, res, next) => {
 	const domain = new Domain({
 		name: req.body.name,

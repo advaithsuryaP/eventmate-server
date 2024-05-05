@@ -42,7 +42,7 @@ exports.addEvent = (req, res, next) => {
 		});
 };
 
-exports.updateEvent = async (req, res, next) => {
+exports.updateEvent = (req, res, next) => {
 	Event.findById(req.params.eventId)
 		.then((document) => {
 			document.image = req.body.image;
