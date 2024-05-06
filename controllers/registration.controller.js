@@ -61,7 +61,7 @@ exports.getRegistrations = (req, res, next) => {
 		});
 };
 
-exports.getRecommendations = (req, res, next) => {
+exports.getEventmates = (req, res, next) => {
 	const { userId, eventId, interests } = req.body;
 	Registration.find({
 		eventId: eventId,

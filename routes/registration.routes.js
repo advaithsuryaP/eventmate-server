@@ -16,9 +16,9 @@ router.delete(
 );
 
 router.post(
-	'/get-eventmate-recommendations',
+	'/get-eventmates',
 	authenticate,
-	registrationController.getRecommendations
+	registrationController.getEventmates
 );
 
 router.put(
