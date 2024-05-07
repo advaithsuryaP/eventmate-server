@@ -82,9 +82,19 @@ exports.getEventmates = (req, res, next) => {
 };
 
 exports.updateRegistration = (req, res, next) => {
+	const updateData = {};
+
+	if (req.body.interests) {
+		updateData.interests = req.body.interests;
+	}
+
+	if (req.body.eventMates) {
+		updateData.eventMates = req.body.eventMates;
+	}
+
 	Registration.findByIdAndUpdate(
-		req.body.registrationId,
-		{ $set: { interests: req.body.interests } }, // Replace interests array
+		req.params.registrationId,
+		{ $set: updateData }, // Replace interests array
 		{ new: true } // Option to return the updated document
 	)
 		.then((result) => {

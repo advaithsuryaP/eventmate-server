@@ -22,7 +22,7 @@ router.post(
 );
 
 router.put(
-	'/update-registration',
+	'/:registrationId',
 	authenticate,
 	registrationController.updateRegistration
 );

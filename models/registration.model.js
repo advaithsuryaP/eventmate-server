@@ -19,7 +19,13 @@ const registrationSchema = new mongoose.Schema(
 			required: true,
 		},
 		interests: [{ type: String, required: true }],
-		eventMates: [{ type: String, required: true }],
+		eventMates: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'User',
+				required: true,
+			},
+		],
 	},
 	{ timestamps: true }
 );
